@@ -269,8 +269,37 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 2rem 0;
   gap: 1rem;
-  margin-top: 2rem;
+  position: relative;
+  min-height: 44px; /* Ensure consistent height during loading */
+}
+
+.pagination button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #e0e0e0;
+  color: #666;
+  border-color: #ccc;
+}
+
+.pagination button:disabled:hover {
+  background-color: #e0e0e0;
+  transform: none;
+  box-shadow: none;
+}
+
+.pagination .loading-text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  display: none;
+}
+
+.pagination.loading .loading-text {
+  display: block;
 }
 
 .pagination button {

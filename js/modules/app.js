@@ -50,16 +50,36 @@ function setupEventListeners(ui, bookService, wishlist, router) {
   });
 
   // Pagination
-  document.getElementById("prev-page").addEventListener("click", () => {
-    bookService.previousPage();
-    ui.updateBookList(bookService.filteredBooks);
-    ui.updatePagination(bookService.pagination);
+  const prevButton = document.getElementById("prev-page");
+  const nextButton = document.getElementById("next-page");
+
+  const handlePagination = async (paginationFn) => {
+    // Disable buttons and show loading
+    prevButton.disabled = true;
+    nextButton.disabled = true;
+    ui.showLoading();
+
+    try {
+      await paginationFn();
+      ui.updateBookList(bookService.filteredBooks);
+      ui.updatePagination(bookService.pagination);
+    } catch (error) {
+      console.error('Error during pagination:', error);
+      ui.showError('Failed to load page. Please try again.');
+    } finally {
+      // Re-enable buttons and hide loading
+      prevButton.disabled = !bookService.pagination.hasPrev;
+      nextButton.disabled = !bookService.pagination.hasNext;
+      ui.hideLoading();
+    }
+  };
+
+  prevButton.addEventListener("click", () => {
+    handlePagination(() => bookService.previousPage());
   });
 
-  document.getElementById("next-page").addEventListener("click", () => {
-    bookService.nextPage();
-    ui.updateBookList(bookService.filteredBooks);
-    ui.updatePagination(bookService.pagination);
+  nextButton.addEventListener("click", () => {
+    handlePagination(() => bookService.nextPage());
   });
 
   // Back button
