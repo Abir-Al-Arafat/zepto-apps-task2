@@ -10,6 +10,23 @@ export class UI {
 
     init() {
         this.updateWishlistCount();
+        // Initialize loading elements
+        this.loadingOverlay = document.querySelector('.loading-overlay');
+        this.loadingIndicator = document.querySelector('.loading-indicator');
+    }
+
+    showLoading() {
+        if (this.loadingOverlay && this.loadingIndicator) {
+            this.loadingOverlay.classList.add('active');
+            this.loadingIndicator.classList.add('active');
+        }
+    }
+
+    hideLoading() {
+        if (this.loadingOverlay && this.loadingIndicator) {
+            this.loadingOverlay.classList.remove('active');
+            this.loadingIndicator.classList.remove('active');
+        }
     }
 
     updateBookList(books) {
