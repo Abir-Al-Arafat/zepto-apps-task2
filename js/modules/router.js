@@ -69,8 +69,11 @@ export class Router {
     }
 
     showHomePage() {
-        // Home page is already set up with the book list
         document.title = 'BookFinder - Home';
+        // Refresh the book list to update wishlist status
+        if (this.ui && this.ui.updateBookList && this.ui.bookService) {
+            this.ui.updateBookList(this.ui.bookService.filteredBooks);
+        }
     }
 
     showWishlistPage() {
