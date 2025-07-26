@@ -197,6 +197,12 @@ export class UI {
                     this.wishlist.removeFromWishlist(bookId);
                     btn.classList.remove('active');
                     this.showError('Removed from wishlist');
+                    this.updateWishlistCount();
+                    
+                    // If we're on the wishlist page, update the view
+                    if (document.querySelector('.router-outlet')?.getAttribute('data-route') === 'wishlist') {
+                        this.updateWishlist(this.wishlist.getWishlist());
+                    }
                 } else {
                     this.bookService.getBookById(bookId)
                         .then(book => {
