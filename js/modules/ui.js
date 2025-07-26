@@ -203,14 +203,13 @@ export class UI {
                             this.wishlist.addToWishlist(book);
                             btn.classList.add('active');
                             this.showError('Added to wishlist');
+                            this.updateWishlistCount();
+                            
+                            // If we're on the wishlist page, update the view
+                            if (document.querySelector('.router-outlet')?.getAttribute('data-route') === 'wishlist') {
+                                this.updateWishlist(this.wishlist.getWishlist());
+                            }
                         });
-                }
-                
-                this.updateWishlistCount();
-                
-                // If we're on the wishlist page, update the view
-                if (document.querySelector('.router-outlet').getAttribute('data-route') === 'wishlist') {
-                    this.updateWishlist(this.wishlist.getWishlist());
                 }
             });
         });
