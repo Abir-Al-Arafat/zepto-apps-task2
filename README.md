@@ -61,7 +61,7 @@ git clone https://github.com/Abir-Al-Arafat/zepto-apps-task2.git
 
 2. **go to folder**
 ```bash
-cd book-explorer
+cd zepto-apps-task2
 ```
 
 3. **Open index.html in vscode**.
